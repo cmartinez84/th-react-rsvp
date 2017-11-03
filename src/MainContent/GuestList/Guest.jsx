@@ -19,12 +19,12 @@ const Guest = props =>
           </li>
 
 Guest.propTypes = {
+  isEditing: PropTypes.bool.isRequired,
+  setName: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   isConfirmed: PropTypes.bool.isRequired,
-  isEditing: PropTypes.bool.isRequired,
   handleConfirmation: PropTypes.func.isRequired,
   handleToggleEditing: PropTypes.func.isRequired,
-  setName: PropTypes.func.isRequired,
   handleRemove: PropTypes.func.isRequired
 }
 export default Guest;

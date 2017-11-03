@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import GuestList from './GuestList.jsx';
+import GuestList from './GuestList';
 import Counter from './Counter.jsx';
 
 

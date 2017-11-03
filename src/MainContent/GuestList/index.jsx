@@ -9,30 +9,29 @@ const GuestList = props =>
         {
           props.guests
           .filter(guest => !props.isFiltered || guest.isConfirmed)
-          .map((guest, i)=>
+          .map((guest)=>
           <Guest
-                key={i}
+                key={guest.id}
                 name={guest.name}
                 isConfirmed={guest.isConfirmed}
                 isEditing={guest.isEditing}
-                handleConfirmation={()=> props.toggleConfirmationAt(i)}
-                handleToggleEditing={()=> props.toggleEditingAt(i)}
-                setName = {text => props.setNameAt(text, i)}
-                handleRemove={() => props.removeGuestAt(i)}
+                handleConfirmation={()=> props.toggleConfirmationAt(guest.id)}
+                handleToggleEditing={()=> props.toggleEditingAt(guest.id)}
+                setName = {text => props.setNameAt(text, guest.id)}
+                handleRemove={() => props.removeGuestAt(guest.id)}
           />
           )
         }
       </ul>
 
 GuestList.propTypes = {
+  pendingGuest: PropTypes.string.isRequired,
   guests: PropTypes.array.isRequired,
+  isFiltered: PropTypes.bool.isRequired,
   toggleConfirmationAt: PropTypes.func.isRequired,
   toggleEditingAt: PropTypes.func.isRequired,
   setNameAt: PropTypes.func.isRequired,
-  isFiltered: PropTypes.bool.isRequired,
   removeGuestAt: PropTypes.func.isRequired,
-  // name: PropTypes.string.isRequired
-
 }
 
 

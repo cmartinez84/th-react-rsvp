@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const Header = props =>
-  <header>
-    <h1>RSVP</h1>
-    <p>A Treehouse App</p>
+const NewGuestForm = props =>
     <form onSubmit={props.newGuestSubmitHandler}>
         <input type="text"
           onChange={props.handleNameInput}
@@ -12,12 +9,11 @@ const Header = props =>
           placeholder="Invite Someone"/>
         <button type="submit" name="submit" value="submit">Submit</button>
     </form>
-  </header>
 
 
-Header.propTypes = {
+NewGuestForm.propTypes = {
   newGuestSubmitHandler: PropTypes.func.isRequired,
   handleNameInput: PropTypes.func.isRequired,
   pendingGuest: PropTypes.string.isRequired
 }
-export default Header;
+export default NewGuestForm;
