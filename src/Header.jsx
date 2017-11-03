@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 const Header = props =>
   <header>
     <h1>RSVP</h1>
-
     <p>A Treehouse App</p>
     <form onSubmit={props.newGuestSubmitHandler}>
         <input type="text"
