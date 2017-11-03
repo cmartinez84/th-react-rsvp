@@ -6,7 +6,6 @@ const Counter = props =>
     <tbody>
       <tr>
         <td>Attending:</td>
-
         <td>{props.numberAttending}</td>
       </tr>
       <tr>

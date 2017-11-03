@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GuestList from './GuestList.jsx';
 import Counter from './Counter.jsx';
+import Header from './Header.jsx';
 import './App.css';
 
 class App extends Component {
@@ -111,19 +112,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
-          <h1>RSVP</h1>
+        <Header
+          newGuestSubmitHandler={this.newGuestSubmitHandler}
+          handleNameInput={this.handleNameInput}
+          pendingGuest={this.state.pendingGuest}
+          />
 
-          <p>A Treehouse App</p>
-          <form onSubmit={this.newGuestSubmitHandler}>
-              <input type="text"
-                onChange={this.handleNameInput}
-                value={this.state.pendingGuest}
-                placeholder="Invite Someone"/>
-              <button type="submit" name="submit" value="submit"
-                >Submit</button>
-          </form>
-        </header>
         <div className="main">
           <div>
             <h2>Invitees</h2>
