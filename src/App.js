@@ -5,6 +5,7 @@ import './App.css';
 class App extends Component {
 //you dont need constructor wth create reat app....wtf
   state = {
+    pendingGuest: '',
     isFiltered: false,
     guests: [
       {
@@ -27,6 +28,10 @@ class App extends Component {
   getTotalInvited = ()=> this.state.guests.length;
   // get attendig guests method
   //get uncomfirmed guests
+
+  handleNameInput = e =>
+  this.setState({pendingGuest: e.target.value})
+
   toggleGuestPropertyAt = (property, indexToChange) =>
     this.setState({
       guests: this.state.guests.map((guest, index)=>{
@@ -65,15 +70,35 @@ class App extends Component {
     this.setState({isFiltered: !this.state.isFiltered});
   }
 
+  newGuestSubmitHandler= e =>{
+    e.preventDefault();
+    this.setState({
+      guests: [
+        {
+          name: this.state.pendingGuest,
+          isConfirmed: false,
+          isEditing: false,
+        },
+        ...this.state.guests
+      ],
+    })
+    this.setState({
+      pendingGuest: ''
+    })
+  }
   render() {
     return (
       <div className="App">
         <header>
           <h1>RSVP</h1>
           <p>A Treehouse App</p>
-          <form>
-              <input type="text" value="Safia" placeholder="Invite Someone"/>
-              <button type="submit" name="submit" value="submit">Submit</button>
+          <form onSubmit={this.newGuestSubmitHandler}>
+              <input type="text"
+                onChange={this.handleNameInput}
+                value={this.state.pendingGuest}
+                placeholder="Invite Someone"/>
+              <button type="submit" name="submit" value="submit"
+                >Submit</button>
           </form>
         </header>
         <div className="main">
