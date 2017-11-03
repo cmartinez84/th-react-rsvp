@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GuestList from './GuestList.jsx';
+import Counter from './Counter.jsx';
 import './App.css';
 
 class App extends Component {
@@ -26,6 +27,13 @@ class App extends Component {
     ]
   }
   getTotalInvited = ()=> this.state.guests.length;
+
+  getNumberAttending = ()=>
+    this.state.guests.reduce((total, guest) =>
+       guest.isConfirmed ? total+1 : 0,
+       0
+    );
+
   // get attendig guests method
   //get uncomfirmed guests
 
@@ -86,11 +94,26 @@ class App extends Component {
       pendingGuest: ''
     })
   }
+
+  removeGuestAt = index => {
+    this.setState({
+      guests: [
+        ...this.state.guests.slice(0, index),
+        ...this.state.guests.slice(index + 1)
+      ]
+    })
+  }
+
   render() {
+    const totalInvited = this.getTotalInvited();
+    const numberAttending = this.getNumberAttending();
+    const numberUnconfirmed = totalInvited - numberAttending;
+
     return (
       <div className="App">
         <header>
           <h1>RSVP</h1>
+
           <p>A Treehouse App</p>
           <form onSubmit={this.newGuestSubmitHandler}>
               <input type="text"
@@ -112,29 +135,20 @@ class App extends Component {
                 /> Hide those who haven't responded
             </label>
           </div>
-          <table className="counter">
-            <tbody>
-              <tr>
-                <td>Attending:</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>Unconfirmed:</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>Total:</td>
-                <td>3</td>
-              </tr>
-            </tbody>
-          </table>
+          <Counter totalInvited={totalInvited}
+                  numberAttending={numberAttending}
+                  numberUnconfirmed={numberUnconfirmed}/>
+
           <GuestList guests={this.state.guests}
             toggleConfirmationAt={this.toggleConfirmationAt}
             toggleEditingAt={this.toggleEditingAt}
             setNameAt={this.setNameAt}
             isFiltered={this.state.isFiltered}
+            removeGuestAt={this.removeGuestAt}
+            pendingGuest={this.state.pendingGuest}
             />
         </div>
+
       </div>
     );
   }
